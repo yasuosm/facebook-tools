@@ -155,14 +155,4 @@ angular.module('appControllers', [])
 
 		appHttp.post('savePhoto', params).success(onSuccess).error(onError).finally(onFinally);
 	};
-
-	$scope.updateItems = function(data) {
-		for (var i = 0; i < data.length; i++) {
-			for (var j = 0; j < $scope.items.length; j++) {
-				if ($scope.items[j].id == data[i].id) {
-					angular.extend($scope.items[j], data[i]);
-				}
-			};
-		};
-	};
 });

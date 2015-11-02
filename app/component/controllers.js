@@ -94,10 +94,10 @@ angular.module('appControllers', [])
 
 	$scope.saveAll = function() {
 		$scope.totalSuccess = 0;
-		// for (var i = 0; i < $scope.items.length; i++) {
-		// 	$scope.saveItem(i);
-		// };
-		$scope.saveItem(0, $scope.items.length);
+		for (var i = 0; i < $scope.items.length; i++) {
+			$scope.saveItem(i);
+		};
+		// $scope.saveItem(0, $scope.items.length);
 	};
 
 	$scope.saveItem = function($index, length) {

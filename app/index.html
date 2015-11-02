@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" dir="ltr" ng-app="app">
+    <head>
+        <title>Facebook Tools</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
+        <script src="component/controllers.js"></script>
+        <script src="component/services.js"></script>
+        <script src="component/app.js"></script>
+        <script src="../vendor/facebook/javascript-sdk/fb.js"></script>
+    </head>
+    <body>
+        <fb:login-button max-rows="1" size="medium" show-faces="false" auto-logout-link="true"></fb:login-button>
+        <div>
+            <span>accessToken:</span>
+            <input type="text" readonly="true" value="{{authResponse.accessToken}}" />
+        </div>
+        <div ng-view></div>
+    </body>
+</html>

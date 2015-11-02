@@ -1,0 +1,6 @@
+{
+  "require" : {
+    "facebook/php-sdk-v4" : "~5.0",
+    "catfan/Medoo": "^1.0"
+  }
+}

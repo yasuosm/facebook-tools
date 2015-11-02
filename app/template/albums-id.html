@@ -1,0 +1,28 @@
+<div>
+	<span>nodeId:</span>
+	<input type="text" readonly="true" value="{{nodeId}}" />
+</div>
+<div>
+	<div>
+		<a ng-if="paging.previous" ng-click="getItems('previous')">Previous</a>
+		<a ng-if="paging.next" ng-click="getItems('next')">Next</a>
+	</div>
+	<div>
+		<span>id</span>
+		<span>is_saved</span>
+		<span>file_exist</span>
+		<a ng-click="saveAll()">Save All</a>
+	</div>
+	<div ng-repeat="item in items">
+		<span>{{item.id}}</span>
+		<span>{{item.is_saved}}</span>
+		<span>{{item.file_exist}}</span>
+		<a ng-click="saveItem($index)" ng-hide="item.isProcessing">Save</a>
+		<span ng-show="item.isProcessing">Processing...</span>
+	</div>
+	<div ng-if="isLoading">Loading...</div>
+	<div>
+		<a ng-if="!items.length && !isLoading" ng-click="getItems()">Load</a>
+		<input type="checkbox" ng-model="auto" /> Auto
+	</div>
+</div>

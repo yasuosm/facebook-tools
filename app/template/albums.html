@@ -1,0 +1,12 @@
+<div>
+    <span>nodeId:</span>
+    <input type="text" ng-model="nodeId" />
+    <input type="button" value="Get" ng-click="getItems()" />
+</div>
+<div>
+	<div ng-repeat="item in items">
+		<a ng-href="#/albums/{{item.id}}">{{item.name}}</a> -
+		<span>{{item.created_time}}</span>
+	</div>
+	<div ng-if="isLoading">Loading...</div>
+</div>

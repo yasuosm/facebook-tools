@@ -102,12 +102,10 @@ angular.module('appControllers', [])
 		for (var i = 0; i < $scope.items.length; i++) {
 			$scope.saveItem(i);
 		};
-		// $scope.saveItem(0, $scope.items.length);
 	};
 
-	$scope.saveItem = function($index, length) {
+	$scope.saveItem = function($index) {
 		var item = $scope.items[$index];
-		var _length = length || 1;
 
 		if (item.isProcessing) {
 			return;
@@ -146,10 +144,6 @@ angular.module('appControllers', [])
 
 		var onFinally = function() {
 			item.isProcessing = false;
-			
-			if ($index < _length - 1) {
-				$scope.saveItem($index + 1, _length);
-			}
 		};
 
 		if (item.is_saved && item.file_exist) {

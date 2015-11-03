@@ -47,6 +47,8 @@ angular.module('appControllers', [])
 		cursors: {}
 	};
 
+	$scope.totalSaved = 0;
+
 	$scope.getItems = function(paging) {
 		if ($scope.isLoading) {
 			return;
@@ -54,6 +56,8 @@ angular.module('appControllers', [])
 
 		$scope.items = [];
 		$scope.isLoading = true;
+
+		$scope.totalSaved = 0;
 
 		var params = {
 			nodeId: $scope.nodeId,
@@ -75,6 +79,8 @@ angular.module('appControllers', [])
 
 			$scope.items = res.data;
 			$scope.paging = res.paging;
+			
+			$scope.totalSaved = $scope.getTotalSaved();
 
 			if ($scope.auto) {
 				$scope.saveAll();
@@ -93,7 +99,6 @@ angular.module('appControllers', [])
 	};
 
 	$scope.saveAll = function() {
-		$scope.totalSuccess = 0;
 		for (var i = 0; i < $scope.items.length; i++) {
 			$scope.saveItem(i);
 		};
@@ -124,9 +129,9 @@ angular.module('appControllers', [])
 		};
 
 		var afterSuccess = function() {
-			$scope.totalSuccess++;
-			if ($scope.totalSuccess == $scope.items.length) {
-				console.info('totalSuccess', $scope.totalSuccess);
+			$scope.totalSaved = $scope.getTotalSaved();
+
+			if ($scope.totalSaved == $scope.items.length) {
 				if ($scope.auto && $scope.paging.next) {
 					$timeout(function() {
 						$scope.getItems('next');
@@ -148,11 +153,23 @@ angular.module('appControllers', [])
 		};
 
 		if (item.is_saved && item.file_exist) {
-			onFinally();
 			afterSuccess();
+			onFinally();
 			return;
 		}
 
 		appHttp.post('savePhoto', params).success(onSuccess).error(onError).finally(onFinally);
+	};
+
+	$scope.getTotalSaved = function() {
+		var total = 0;
+
+		for (var i = 0; i < $scope.items.length; i++) {
+			if ($scope.items[i].is_saved && $scope.items[i].file_exist) {
+				total++;
+			}
+		};
+
+		return total;
 	};
 });

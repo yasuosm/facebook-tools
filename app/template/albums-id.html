@@ -4,6 +4,10 @@
 </div>
 <div>
 	<div>
+		<span>Saved:</span>
+		<span>{{totalSaved}}/{{items.length}}</span>
+	</div>
+	<div>
 		<a ng-if="paging.previous" ng-click="getItems('previous')">Previous</a>
 		<a ng-if="paging.next" ng-click="getItems('next')">Next</a>
 	</div>
@@ -11,13 +15,13 @@
 		<span>id</span>
 		<span>is_saved</span>
 		<span>file_exist</span>
-		<a ng-click="saveAll()">Save All</a>
+		<a ng-click="saveAll()">Save</a>
 	</div>
 	<div ng-repeat="item in items">
 		<span>{{item.id}}</span>
 		<span>{{item.is_saved}}</span>
 		<span>{{item.file_exist}}</span>
-		<a ng-click="saveItem($index)" ng-hide="item.isProcessing">Save</a>
+		<a ng-click="saveItem($index)" ng-hide="item.isProcessing || (item.is_saved && item.file_exist)">Save</a>
 		<span ng-show="item.isProcessing">Processing...</span>
 	</div>
 	<div ng-if="isLoading">Loading...</div>
